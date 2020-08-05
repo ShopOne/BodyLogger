@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BodyLogger</string>
+    <string name="body_weight">体重</string>
+    <string name="body_fat_per">体脂肪率</string>
 </resources>

@@ -13,9 +13,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val dummy = List<BodyInfo>(5){i -> BodyInfo(i,i,Date(),List(2){j->"$j $i"})}
+        val dummy = List<BodyInfo>(5){i -> BodyInfo(i,i,Calendar.getInstance(),List(2){j->"$j $i"})}
         my_recyclerview.layoutManager = LinearLayoutManager(this)
 
+        my_recyclerview.adapter = CardAdapter(dummy,resources)
 
     }
 }
