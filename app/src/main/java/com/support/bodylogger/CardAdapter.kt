@@ -1,17 +1,24 @@
 package com.support.bodylogger
 
 import BodyInfo
+import android.annotation.SuppressLint
 import android.content.res.Resources
+import android.text.Html
+import android.text.Html.FROM_HTML_MODE_COMPACT
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.recyclerview_item.view.*
 import java.util.*
 
-class CardAdapter(private val bodyInfoList: List<BodyInfo>, private val resources: Resources) : RecyclerView.Adapter<CardAdapter.CardHolder>(){
+class CardAdapter(private val bodyInfoList: List<BodyInfo>,
+                  private val resources: Resources,
+                  private val onClick: View.OnClickListener
+) : RecyclerView.Adapter<CardAdapter.CardHolder>(){
     class CardHolder(val view: View) :RecyclerView.ViewHolder(view){
         /*
         val dateId = view.card_date
@@ -27,13 +34,21 @@ class CardAdapter(private val bodyInfoList: List<BodyInfo>, private val resource
             val year = item.infoDate.get(Calendar.MONTH)
             val day = item.infoDate.get(Calendar.DATE)
             val yydd = "$year/$day"
-            val weightText = resources.getString(R.string.body_weight) + " " +
-                    item.bodyWeight.toString() + "kg"
-            val bodyParFatText = resources.getString(R.string.body_fat_per) + " " +
-                    item.bodyFatPercentage.toString() + "%"
+            val weightTextHtml =
+                """${resources.getString(R.string.body_weight)}: 
+                    <font color="Red">
+                        ${item.bodyWeight}
+                    </font>kg"""
+            val bodyParFatTextHtml =
+                """${resources.getString(R.string.body_fat_per)}:
+                    <font color="Red">
+                        ${item.bodyFatPercentage.toString()}
+                    </font>%"""
             it.card_date.text = yydd
-            it.card_weight.text = weightText
-            it.card_fat_percentage.text =bodyParFatText
+            it.card_weight.text = HtmlCompat.fromHtml(weightTextHtml,HtmlCompat.FROM_HTML_MODE_COMPACT)
+            it.card_fat_percentage.text = HtmlCompat.fromHtml(bodyParFatTextHtml,HtmlCompat.FROM_HTML_MODE_COMPACT)
+            it.setOnClickListener(onClick)
+
         }
     }
 
