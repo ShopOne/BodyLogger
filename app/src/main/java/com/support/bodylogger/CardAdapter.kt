@@ -2,6 +2,8 @@ package com.support.bodylogger
 
 import BodyInfo
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.content.res.Resources
 import android.text.Html
 import android.text.Html.FROM_HTML_MODE_COMPACT
@@ -17,7 +19,7 @@ import java.util.*
 
 class CardAdapter(private val bodyInfoList: List<BodyInfo>,
                   private val resources: Resources,
-                  private val onClick: View.OnClickListener
+                  private val nowActivity: Activity
 ) : RecyclerView.Adapter<CardAdapter.CardHolder>(){
     class CardHolder(val view: View) :RecyclerView.ViewHolder(view){
         /*
@@ -47,7 +49,11 @@ class CardAdapter(private val bodyInfoList: List<BodyInfo>,
             it.card_date.text = yydd
             it.card_weight.text = HtmlCompat.fromHtml(weightTextHtml,HtmlCompat.FROM_HTML_MODE_COMPACT)
             it.card_fat_percentage.text = HtmlCompat.fromHtml(bodyParFatTextHtml,HtmlCompat.FROM_HTML_MODE_COMPACT)
-            it.setOnClickListener(onClick)
+            it.setOnClickListener{
+                val intent = Intent(nowActivity,PopUpCardActivity::class.java)
+                intent.putExtra("BodyData", item)
+                nowActivity.startActivity(intent)
+            }
 
         }
     }

@@ -19,10 +19,7 @@ class MainActivity : AppCompatActivity() {
         val dummy = List<BodyInfo>(5){i -> BodyInfo(i,i,Calendar.getInstance(),List(2){j->"$j $i"})}
         my_recyclerview.layoutManager = LinearLayoutManager(this)
 
-        my_recyclerview.adapter = CardAdapter(dummy,resources,View.OnClickListener {
-            val intent = Intent(this,PopUpCardActivity::class.java)
-            startActivity(intent)
-        })
+        my_recyclerview.adapter = CardAdapter(dummy,resources,this)
 
     }
 }
