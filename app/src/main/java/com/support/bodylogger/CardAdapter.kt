@@ -1,23 +1,18 @@
 package com.support.bodylogger
 
-import BodyInfo
-import android.annotation.SuppressLint
+import BodyInfoEntity
 import android.app.Activity
 import android.content.Intent
 import android.content.res.Resources
-import android.text.Html
-import android.text.Html.FROM_HTML_MODE_COMPACT
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.recyclerview_item.view.*
 import java.util.*
 
-class CardAdapter(private val bodyInfoList: List<BodyInfo>,
+class CardAdapter(private val bodyInfoList: List<BodyInfoEntity>,
                   private val resources: Resources,
                   private val nowActivity: Activity
 ) : RecyclerView.Adapter<CardAdapter.CardHolder>(){

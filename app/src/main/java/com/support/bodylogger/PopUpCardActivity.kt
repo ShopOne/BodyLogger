@@ -1,6 +1,6 @@
 package com.support.bodylogger
 
-import BodyInfo
+import BodyInfoEntity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -13,7 +13,7 @@ class PopUpCardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pop_up_card)
         val state = intent.getSerializableExtra("BodyData")
-        if(state is BodyInfo){
+        if(state is BodyInfoEntity){
             pop_up_card_weight.text = state.bodyWeight.toString()
             pop_up_card_fat_par.text = state.bodyFatPercentage.toString()
             pop_up_card_image.setImageResource(state.imageId ?: R.drawable.ic_launcher_background)
