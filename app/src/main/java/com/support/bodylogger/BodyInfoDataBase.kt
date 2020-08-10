@@ -1,3 +1,5 @@
+package com.support.bodylogger
+
 import androidx.room.Database
 import androidx.room.RoomDatabase
 

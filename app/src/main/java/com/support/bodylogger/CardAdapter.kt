@@ -1,9 +1,9 @@
 package com.support.bodylogger
 
-import BodyInfoEntity
 import android.app.Activity
 import android.content.Intent
 import android.content.res.Resources
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,9 +28,9 @@ class CardAdapter(private val bodyInfoList: List<BodyInfoEntity>,
     override fun onBindViewHolder(holder: CardHolder, position: Int) {
         holder.view.let{
             val item = bodyInfoList[position]
-            val year = item.infoDate.get(Calendar.MONTH)
-            val day = item.infoDate.get(Calendar.DATE)
-            val yydd = "$year/$day"
+            val month = item.infoMonth
+            val day = item.infoDate
+            val mmdd = "$month/$day"
             val weightTextHtml =
                 """${resources.getString(R.string.body_weight)}: 
                     <font color="Red">
@@ -41,7 +41,7 @@ class CardAdapter(private val bodyInfoList: List<BodyInfoEntity>,
                     <font color="Red">
                         ${item.bodyFatPercentage.toString()}
                     </font>%"""
-            it.card_date.text = yydd
+            it.card_date.text = mmdd
             it.card_weight.text = HtmlCompat.fromHtml(weightTextHtml,HtmlCompat.FROM_HTML_MODE_COMPACT)
             it.card_fat_percentage.text = HtmlCompat.fromHtml(bodyParFatTextHtml,HtmlCompat.FROM_HTML_MODE_COMPACT)
             it.setOnClickListener{
