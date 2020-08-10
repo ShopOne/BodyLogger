@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:fullBackupContent="@xml/my_backup_rules"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/NoActionBarTheme">
         <activity android:name=".AddNewInfoActivity" />
         <activity android:name=".PopUpCardActivity" />
         <activity android:name=".MainActivity">

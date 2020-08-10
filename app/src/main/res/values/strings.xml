@@ -3,5 +3,5 @@
     <string name="body_weight">体重</string>
     <string name="body_fat_per">体脂肪率</string>
     <string name="body_image_str">体型画像</string>
-    <string name="add_button">追加</string>
+    <string name="add_button">データ追加</string>
 </resources>
