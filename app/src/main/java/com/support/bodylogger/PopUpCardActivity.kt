@@ -2,7 +2,10 @@ package com.support.bodylogger
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AlertDialog
+import kotlinx.android.synthetic.main.activity_add_new_info.*
 import kotlinx.android.synthetic.main.activity_pop_up_card.*
 
 class PopUpCardActivity : AppCompatActivity() {

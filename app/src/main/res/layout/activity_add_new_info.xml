@@ -34,16 +34,16 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:text="@string/write_comment_btn"
-        app:layout_constraintBottom_toTopOf="@+id/addButton"
+        app:layout_constraintBottom_toTopOf="@+id/addNewInfoButton"
         tools:layout_editor_absoluteX="16dp" />
 
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/addNewInfoButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="-120dp" />
 
     <ImageView
         android:id="@+id/imageView"

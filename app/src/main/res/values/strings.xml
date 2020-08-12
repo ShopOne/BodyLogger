@@ -5,4 +5,6 @@
     <string name="body_image_str">体型画像</string>
     <string name="write_comment_btn">コメントを記入</string>
     <string name="add_button">データ追加</string>
+    <string name="add_comment_btn">コメント追加</string>
+    <string name="complete_button">完了</string>
 </resources>
