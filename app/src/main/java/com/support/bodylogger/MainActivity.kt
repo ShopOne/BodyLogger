@@ -1,5 +1,6 @@
 package com.support.bodylogger
 
+import android.app.Activity
 import android.content.Intent
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import android.os.Handler
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_main.*
@@ -16,10 +18,16 @@ import java.util.Calendar.*
 
 class MainActivity : AppCompatActivity() {
 
+    companion object{
+        private const val LAST_MONTH = 12
+        private const val FIRST_MONTH = 1
+    }
     private lateinit var db: BodyInfoDataBase
     private lateinit var dao: BodyInfoDao
     private lateinit var mainHandler: Handler
-    private val nowCalender = getInstance()
+    private val todayCalender = getInstance()
+    private var nowYear = todayCalender.get(YEAR)
+    private var nowMonth = todayCalender.get(MONTH)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -30,9 +38,11 @@ class MainActivity : AppCompatActivity() {
         ).enableMultiInstanceInvalidation().build()
         dao = db.bodyInfoDao()
         mainHandler = Handler()
+        changeNowDayView()
         setDataToListFromDataBase()
         setSupportActionBar(my_toolbar)
-
+        dateLeftButton.setOnClickListener(ChangeDateButtonListener(this))
+        dateRightButton.setOnClickListener(ChangeDateButtonListener(this))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -56,14 +66,46 @@ class MainActivity : AppCompatActivity() {
     }
     private fun setDataToListFromDataBase(){
         AsyncTask.execute{
-            val now = getInstance()
-            val displayList = dao.searchByMonthAndYear(now.get(MONTH),now.get(YEAR))
+            val displayList = dao.searchByMonthAndYear(nowMonth,nowYear)
             mainHandler.post {
                 my_recyclerview.layoutManager = LinearLayoutManager(this)
 
                 my_recyclerview.adapter = CardAdapter(displayList.sortedWith(
                     kotlin.Comparator { a,b -> a.infoDate.compareTo(b.infoDate)
                 }),resources,this)
+            }
+        }
+    }
+    private fun changeNowDayView(){
+        val todayStr = "${nowYear}/${nowMonth}"
+        dateTextView.text = todayStr
+    }
+    fun nextMonth(){
+        nowMonth++
+        if(nowMonth>LAST_MONTH){
+            nowYear++
+            nowMonth = FIRST_MONTH
+        }
+        changeNowDayView()
+        setDataToListFromDataBase()
+    }
+    fun prevMonth(){
+        nowMonth--
+        if(nowMonth<FIRST_MONTH){
+            nowMonth = LAST_MONTH
+            nowYear--
+        }
+        changeNowDayView()
+        setDataToListFromDataBase()
+    }
+
+}
+class ChangeDateButtonListener(private val nowActivity: Activity): View.OnClickListener{
+    override fun onClick(v: View?) {
+        if(nowActivity is MainActivity){
+            when(v?.id){
+                R.id.dateLeftButton -> nowActivity.prevMonth()
+                R.id.dateRightButton -> nowActivity.nextMonth()
             }
         }
     }
