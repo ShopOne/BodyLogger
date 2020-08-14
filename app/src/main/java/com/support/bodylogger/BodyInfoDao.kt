@@ -7,8 +7,11 @@ import androidx.room.Query
 
 @Dao
 interface BodyInfoDao{
-    @Query("SELECT * FROM BodyInfoEntity WHERE infoMonth == :month AND infoYear == :year")
+    @Query("SELECT * FROM BodyInfoEntity WHERE infoMonth = :month AND infoYear = :year")
     fun searchByMonthAndYear(month: Int,year: Int): List<BodyInfoEntity>
+
+    @Query("SELECT * FROM BodyInfoEntity")
+    fun searchAll(): List<BodyInfoEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertBodyInfo(bodyInfo: BodyInfoEntity)

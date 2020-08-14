@@ -8,4 +8,6 @@
     <string name="add_comment_btn">コメント追加</string>
     <string name="complete_button">完了</string>
     <string name="comment_hint">コメント</string>
+    <string name="left_arrow">←</string>
+    <string name="right_arrow">→</string>
 </resources>

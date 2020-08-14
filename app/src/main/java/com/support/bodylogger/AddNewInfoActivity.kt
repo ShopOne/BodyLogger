@@ -64,7 +64,7 @@ class AddNewInfoActivity : AppCompatActivity() {
             }
             val commentText = strBuilder.toString()
             return BodyInfoEntity(
-                dateStr = "$year/$month/$date",
+                dateStr = BodyInfoEntity.generateData(year,month,date),
                 bodyWeight = weightInfo,
                 bodyFatPercentage = fatPerInfo,
                 infoMonth = month,

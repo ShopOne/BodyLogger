@@ -5,6 +5,7 @@ import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var db: BodyInfoDataBase
     private lateinit var dao: BodyInfoDao
     private lateinit var mainHandler: Handler
+    private val nowCalender = getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -28,25 +30,7 @@ class MainActivity : AppCompatActivity() {
         ).enableMultiInstanceInvalidation().build()
         dao = db.bodyInfoDao()
         mainHandler = Handler()
-        val now:Calendar = getInstance()
-        val date = now.get(DATE)
-        val year = now.get(YEAR)
-        val month = now.get(MONTH)
-        val dummy = List(5){ i ->
-            BodyInfoEntity(
-                dateStr = "$year/$month/$date",
-                bodyWeight = i,
-                bodyFatPercentage = i,
-                infoMonth = month,
-                infoYear = year,
-                infoDate = date,
-                commentText = "this is test.\nyes yes.",
-                imageId = null
-            )
-        }
-        my_recyclerview.layoutManager = LinearLayoutManager(this)
-
-        my_recyclerview.adapter = CardAdapter(dummy,resources,this)
+        setDataToListFromDataBase()
         setSupportActionBar(my_toolbar)
 
     }
@@ -65,14 +49,21 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    override fun onRestart() {
+        super.onRestart()
+        setDataToListFromDataBase()
+    }
     private fun setDataToListFromDataBase(){
         AsyncTask.execute{
             val now = getInstance()
-            val displayList = dao.searchByMonthAndYear(now.get(DAY_OF_YEAR),now.get(DAY_OF_MONTH))
+            val displayList = dao.searchByMonthAndYear(now.get(MONTH),now.get(YEAR))
             mainHandler.post {
                 my_recyclerview.layoutManager = LinearLayoutManager(this)
 
-                my_recyclerview.adapter = CardAdapter(displayList,resources,this)
+                my_recyclerview.adapter = CardAdapter(displayList.sortedWith(
+                    kotlin.Comparator { a,b -> a.infoDate.compareTo(b.infoDate)
+                }),resources,this)
             }
         }
     }

@@ -8,13 +8,18 @@ import java.util.Calendar.DAY_OF_MONTH
 import java.util.Calendar.DAY_OF_YEAR
 
 @Entity
-data class BodyInfoEntity constructor(
+class BodyInfoEntity constructor(
     @PrimaryKey val dateStr: String,
     val bodyWeight: Int,
     val bodyFatPercentage:Int,
     val commentText: String,
+    val infoYear: Int,
     val infoMonth: Int,
     val infoDate: Int,
-    val infoYear: Int,
     val imageId: Int?): Serializable{
+    companion object{
+        fun generateData(year: Int,month: Int,date :Int): String{
+            return "$year/$month/$date"
+        }
+    }
 }
