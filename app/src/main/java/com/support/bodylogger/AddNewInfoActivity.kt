@@ -3,6 +3,7 @@ package com.support.bodylogger
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.room.Room
@@ -19,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_add_new_info.*
 import kotlinx.android.synthetic.main.custom_alert_layout.view.*
 import kotlinx.android.synthetic.main.list_item.view.*
 import java.lang.IllegalStateException
+import java.lang.NumberFormatException
 import java.util.*
 import java.util.Calendar.*
 
@@ -40,34 +43,44 @@ class AddNewInfoActivity : AppCompatActivity() {
             dialog.show(supportFragmentManager,"AddCommentDialog")
         }
         addNewInfoButton.setOnClickListener{
-            val weightInfo = inputWeight.toString().toInt()
-            val fatPerInfo = inputBodyPerFat.toString().toInt()
-            val todayCalender = getInstance()
-            val date = todayCalender.get(DATE)
-            val month = todayCalender.get(MONTH)
-            val year = todayCalender.get(YEAR)
-            val commentList:MutableList<String> = editTextAdapter.list.toMutableList()
-            commentList.remove("")
-            val strBuilder = StringBuilder()
-            commentList.forEachIndexed{index: Int, s: String ->
-                strBuilder.append(s)
-                if(index != commentList.size-1){
-                    strBuilder.append("\n")
+            val weightInfoStr = inputWeight.text.toString()
+            val fatPerInfoStr = inputBodyPerFat.text.toString()
+            try{
+                val weightInfo = weightInfoStr.toInt()
+                val fatPerInfo = fatPerInfoStr.toInt()
+                val todayCalender = getInstance()
+                val date = todayCalender.get(DATE)
+                val month = todayCalender.get(MONTH)
+                val year = todayCalender.get(YEAR)
+                val commentList:MutableList<String> = editTextAdapter.list.toMutableList()
+                commentList.remove("")
+                val strBuilder = StringBuilder()
+                commentList.forEachIndexed{index: Int, s: String ->
+                    strBuilder.append(s)
+                    if(index != commentList.size-1){
+                        strBuilder.append("\n")
+                    }
                 }
+                val commentText = strBuilder.toString()
+                AsyncTask.execute{
+                    dao.insertBodyInfo(
+                        BodyInfoEntity(
+                            dateStr = "$year/$month/$date",
+                            bodyWeight = weightInfo,
+                            bodyFatPercentage = fatPerInfo,
+                            infoMonth = month,
+                            infoYear = year,
+                            infoDate = date,
+                            commentText = commentText,
+                            imageId = null
+                        )
+                    )
+                }
+                finish()
+            }catch (e: NumberFormatException){
+                Toast.makeText(applicationContext, "体重と体脂肪率を記入して下さい",
+                    Toast.LENGTH_SHORT).show()
             }
-            val commentText = strBuilder.toString()
-            dao.insertBodyInfo(
-                BodyInfoEntity(
-                    id = 0,
-                    bodyWeight = weightInfo,
-                    bodyFatPercentage = fatPerInfo,
-                    infoMonth = month,
-                    infoYear = year,
-                    infoDate = date,
-                    commentText = commentText,
-                    imageId = null
-                )
-            )
         }
     }
 

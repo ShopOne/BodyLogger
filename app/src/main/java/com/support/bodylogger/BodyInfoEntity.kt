@@ -9,7 +9,7 @@ import java.util.Calendar.DAY_OF_YEAR
 
 @Entity
 data class BodyInfoEntity constructor(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey val dateStr: String,
     val bodyWeight: Int,
     val bodyFatPercentage:Int,
     val commentText: String,

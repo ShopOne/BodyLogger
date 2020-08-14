@@ -29,14 +29,17 @@ class MainActivity : AppCompatActivity() {
         dao = db.bodyInfoDao()
         mainHandler = Handler()
         val now:Calendar = getInstance()
+        val date = now.get(DATE)
+        val year = now.get(YEAR)
+        val month = now.get(MONTH)
         val dummy = List(5){ i ->
             BodyInfoEntity(
-                id = 0,
+                dateStr = "$year/$month/$date",
                 bodyWeight = i,
                 bodyFatPercentage = i,
-                infoMonth = now.get(MONTH),
-                infoYear = now.get(YEAR),
-                infoDate = now.get(DATE),
+                infoMonth = month,
+                infoYear = year,
+                infoDate = date,
                 commentText = "this is test.\nyes yes.",
                 imageId = null
             )
