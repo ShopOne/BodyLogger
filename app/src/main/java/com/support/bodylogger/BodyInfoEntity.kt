@@ -3,9 +3,6 @@ package com.support.bodylogger
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
-import java.util.*
-import java.util.Calendar.DAY_OF_MONTH
-import java.util.Calendar.DAY_OF_YEAR
 
 @Entity
 class BodyInfoEntity constructor(

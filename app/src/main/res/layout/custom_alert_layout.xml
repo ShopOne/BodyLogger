@@ -6,6 +6,16 @@
     android:layout_height="match_parent">
 
     <ImageButton
+        android:id="@+id/subImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:contentDescription="@string/sub_comment_btn"
+        app:layout_constraintEnd_toStartOf="@+id/addImageButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_revert" />
+
+    <ImageButton
         android:id="@+id/addImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
