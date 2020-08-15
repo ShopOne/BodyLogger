@@ -13,7 +13,7 @@ class BodyInfoEntity constructor(
     val infoYear: Int,
     val infoMonth: Int,
     val infoDate: Int,
-    val imageId: Int?): Serializable{
+    val imageName: String?): Serializable{
     companion object{
         fun generateData(year: Int,month: Int,date :Int): String{
             return "$year/$month/$date"
