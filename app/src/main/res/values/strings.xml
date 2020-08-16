@@ -17,4 +17,10 @@
     <string name="pop_up_card_list_title">その他コメント</string>
     <string name="pop_up_card_body_weight">:%3.2f kg</string>
     <string name="pop_up_card_body_per_fat">:%3.2f %%</string>
+    <string name="first_main_activity_desc">
+        右上のボタンを押すと、\n新たに今日の体重情報について\n入力することが出来ます。\n\nこのページには月ごとの体重情報一覧が表示されます。\n\n体重情報をタップすると、\n詳細が確認出来ます。
+    </string>
+    <string name="first_add_new_info_desc">
+        体重・体脂肪率・補足画像・\nその他コメントを追加できます。\n\n補足画像はカメラで撮影します。\n自分の体型を撮影しておくと\n身体の変化が分かってオススメです。\n\nコメントは最大4つまで記入できます。\n何も書かなければ追加されません。\n\n同じ日に2度データ追加をした場合は、\n最期に追加したものが優先されます。
+    </string>
 </resources>

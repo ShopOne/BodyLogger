@@ -37,6 +37,7 @@ class AddNewInfoActivity : AppCompatActivity() {
     companion object{
         const val REQUEST_GET_IMAGE = 0
         const val REQUEST_EXTERNAL_PERM = 2000
+        const val FIRST_ADD_INFO = "FIRST_ADD_INFO"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +62,20 @@ class AddNewInfoActivity : AppCompatActivity() {
         bodyImageButton.setOnClickListener{
             showGallery()
         }
+        if(isFirstJudge()){
+            val dialog = SimpleAlertDialog("初回ガイド",
+                resources.getString(R.string.first_add_new_info_desc))
+            dialog.show(supportFragmentManager, null)
+            val edit = getSharedPreferences(FIRST_ADD_INFO,
+                Context.MODE_PRIVATE).edit()
+            edit.putBoolean(FIRST_ADD_INFO, false)
+            edit.apply()
+        }
+    }
+    private fun isFirstJudge(): Boolean{
+        return getSharedPreferences(
+            FIRST_ADD_INFO,
+            Context.MODE_PRIVATE).getBoolean(FIRST_ADD_INFO,true)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

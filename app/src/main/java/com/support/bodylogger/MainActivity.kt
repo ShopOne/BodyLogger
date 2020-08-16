@@ -1,7 +1,10 @@
 package com.support.bodylogger
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.icu.text.DateTimePatternGenerator.PatternInfo.OK
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     companion object{
         private const val LAST_MONTH = 11
         private const val FIRST_MONTH = 0
+        private const val IS_FIRST_MAIN_ACTIVITY = "IS_FIRST_MAIN_ACTIVITY"
     }
     private lateinit var db: BodyInfoDataBase
     private lateinit var dao: BodyInfoDao
@@ -43,8 +47,23 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(my_toolbar)
         dateLeftButton.setOnClickListener(ChangeDateButtonListener(this))
         dateRightButton.setOnClickListener(ChangeDateButtonListener(this))
+
+        if(isFirstJudge()){
+            val dialog = SimpleAlertDialog("初回メッセージ",
+                resources.getString(R.string.first_main_activity_desc))
+            dialog.show(supportFragmentManager, null)
+            val edit = getSharedPreferences(IS_FIRST_MAIN_ACTIVITY,
+                Context.MODE_PRIVATE).edit()
+            edit.putBoolean(IS_FIRST_MAIN_ACTIVITY,false)
+            edit.apply()
+        }
     }
 
+    private fun isFirstJudge(): Boolean{
+        return getSharedPreferences(
+            IS_FIRST_MAIN_ACTIVITY,
+            Context.MODE_PRIVATE).getBoolean(IS_FIRST_MAIN_ACTIVITY,true)
+    }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_item, menu)
         return true
