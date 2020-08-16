@@ -22,7 +22,10 @@ class PopUpCardActivity : AppCompatActivity() {
         if(state is BodyInfoEntity){
             pop_up_card_weight.text = String.format(getString(R.string.pop_up_card_body_weight), state.bodyWeight)
             pop_up_card_fat_par.text = String.format(getString(R.string.pop_up_card_body_per_fat), state.bodyFatPercentage)
-            pop_up_card_image.setImageBitmap(readImgFromFileName(state.imageName))
+            val bitmap = readImgFromFileName(state.imageName)
+            if(bitmap != null){
+                pop_up_card_image.setImageBitmap(bitmap)
+            }
             otherList.adapter =  ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1,state.commentText.split("\n"))
         }
