@@ -42,9 +42,8 @@ class AddNewInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_new_info)
         initDataBase()
-        val adapter = EditTextAdapter(layoutInflater, this)
         writeCommentButton.setOnClickListener {
-            val dialog = AddCommentDialogFragment(adapter,nowCommentList)
+            val dialog = AddCommentDialogFragment(nowCommentList)
             dialog.show(supportFragmentManager, "AddCommentDialog")
         }
         addNewInfoButton.setOnClickListener{
@@ -149,8 +148,8 @@ class AddNewInfoActivity : AppCompatActivity() {
         val month = todayCalender.get(MONTH)
         val year = todayCalender.get(YEAR)
         val commentList:MutableList<String> = nowCommentList.toMutableList()
-        commentList.remove("")
         val strBuilder = StringBuilder()
+        commentList.removeAll{it == ""}
         commentList.forEachIndexed{index: Int, s: String ->
             strBuilder.append(s)
             if(index != commentList.size-1){
@@ -170,8 +169,8 @@ class AddNewInfoActivity : AppCompatActivity() {
         }
         return BodyInfoEntity(
             dateStr = BodyInfoEntity.generateData(year,month,date),
-            bodyWeight = weightInfo.toFloat(),
-            bodyFatPercentage = fatPerInfo.toFloat(),
+            bodyWeight = weightInfo,
+            bodyFatPercentage = fatPerInfo,
             infoMonth = month,
             infoYear = year,
             infoDate = date,

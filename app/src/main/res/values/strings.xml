@@ -6,9 +6,12 @@
     <string name="write_comment_btn">コメントを記入</string>
     <string name="add_button">データ追加</string>
     <string name="add_comment_btn">コメント追加</string>
-    <string name="sub_comment_btn">コメント追加</string>
+    <string name="sub_comment_btn">コメント削除</string>
     <string name="complete_button">完了</string>
-    <string name="comment_hint">コメント</string>
+    <string name="comment_hint0">コメント0</string>
+    <string name="comment_hint1">コメント1</string>
+    <string name="comment_hint2">コメント2</string>
+    <string name="comment_hint3">コメント3</string>
     <string name="left_arrow">←</string>
     <string name="right_arrow">→</string>
     <string name="pop_up_card_list_title">その他コメント</string>
