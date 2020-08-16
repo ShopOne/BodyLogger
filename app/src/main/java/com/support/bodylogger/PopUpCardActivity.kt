@@ -20,14 +20,15 @@ class PopUpCardActivity : AppCompatActivity() {
         setContentView(R.layout.activity_pop_up_card)
         val state = intent.getSerializableExtra("BodyData")
         if(state is BodyInfoEntity){
-            pop_up_card_weight.text = state.bodyWeight.toString()
-            pop_up_card_fat_par.text = state.bodyFatPercentage.toString()
+            pop_up_card_weight.text = String.format(getString(R.string.pop_up_card_body_weight), state.bodyWeight)
+            pop_up_card_fat_par.text = String.format(getString(R.string.pop_up_card_body_per_fat), state.bodyFatPercentage)
             pop_up_card_image.setImageBitmap(readImgFromFileName(state.imageName))
             otherList.adapter =  ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1,state.commentText.split("\n"))
         }
     }
     private fun readImgFromFileName(fileName:String?): Bitmap? {
+        if(fileName == null) return null
         val bufferedInputStream = BufferedInputStream(applicationContext.openFileInput(fileName))
         return BitmapFactory.decodeStream(bufferedInputStream)
     }

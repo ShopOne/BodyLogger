@@ -142,8 +142,8 @@ class AddNewInfoActivity : AppCompatActivity() {
     private fun makeEntity(): BodyInfoEntity{
         val weightInfoStr = inputWeight.text.toString()
         val fatPerInfoStr = inputBodyPerFat.text.toString()
-        val weightInfo = weightInfoStr.toInt()
-        val fatPerInfo = fatPerInfoStr.toInt()
+        val weightInfo = weightInfoStr.toFloat()
+        val fatPerInfo = fatPerInfoStr.toFloat()
         val todayCalender = getInstance()
         val date = todayCalender.get(DATE)
         val month = todayCalender.get(MONTH)
@@ -170,8 +170,8 @@ class AddNewInfoActivity : AppCompatActivity() {
         }
         return BodyInfoEntity(
             dateStr = BodyInfoEntity.generateData(year,month,date),
-            bodyWeight = weightInfo,
-            bodyFatPercentage = fatPerInfo,
+            bodyWeight = weightInfo.toFloat(),
+            bodyFatPercentage = fatPerInfo.toFloat(),
             infoMonth = month,
             infoYear = year,
             infoDate = date,

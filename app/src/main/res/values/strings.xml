@@ -11,4 +11,7 @@
     <string name="comment_hint">コメント</string>
     <string name="left_arrow">←</string>
     <string name="right_arrow">→</string>
+    <string name="pop_up_card_list_title">その他コメント</string>
+    <string name="pop_up_card_body_weight">:%3.2f kg</string>
+    <string name="pop_up_card_body_per_fat">:%3.2f %%</string>
 </resources>

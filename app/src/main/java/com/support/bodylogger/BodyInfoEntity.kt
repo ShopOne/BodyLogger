@@ -7,8 +7,8 @@ import java.io.Serializable
 @Entity
 class BodyInfoEntity constructor(
     @PrimaryKey val dateStr: String,
-    val bodyWeight: Int,
-    val bodyFatPercentage:Int,
+    val bodyWeight: Float,
+    val bodyFatPercentage: Float,
     val commentText: String,
     val infoYear: Int,
     val infoMonth: Int,

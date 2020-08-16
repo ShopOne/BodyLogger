@@ -19,8 +19,8 @@ import java.util.Calendar.*
 class MainActivity : AppCompatActivity() {
 
     companion object{
-        private const val LAST_MONTH = 12
-        private const val FIRST_MONTH = 1
+        private const val LAST_MONTH = 11
+        private const val FIRST_MONTH = 0
     }
     private lateinit var db: BodyInfoDataBase
     private lateinit var dao: BodyInfoDao
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun changeNowDayView(){
-        val todayStr = "${nowYear}/${nowMonth}"
+        val todayStr = "${nowYear}/${nowMonth+1}"
         dateTextView.text = todayStr
     }
     fun nextMonth(){

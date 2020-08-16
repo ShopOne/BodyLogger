@@ -28,7 +28,7 @@ class CardAdapter(private val bodyInfoList: List<BodyInfoEntity>,
     override fun onBindViewHolder(holder: CardHolder, position: Int) {
         holder.view.let{
             val item = bodyInfoList[position]
-            val month = item.infoMonth
+            val month = item.infoMonth + 1
             val day = item.infoDate
             val mmdd = "$month/$day"
             val weightTextHtml =

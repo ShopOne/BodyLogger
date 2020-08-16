@@ -13,7 +13,7 @@
         android:layout_marginTop="37dp"
         android:autofillHints="@string/body_weight"
         android:hint="@string/body_weight"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,7 +24,7 @@
         android:layout_marginTop="40dp"
         android:autofillHints="@string/body_fat_per"
         android:hint="@string/body_fat_per"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputWeight" />
 
@@ -51,9 +51,9 @@
         android:layout_height="300dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
+        android:scaleType="fitCenter"
         android:background="@android:drawable/ic_menu_gallery"
         android:contentDescription="@string/body_image_str"
-        android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/writeCommentButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
